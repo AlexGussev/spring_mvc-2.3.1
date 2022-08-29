@@ -3,38 +3,42 @@ package web.entity;
 import javax.persistence.*;
 
 
-@Table(name = "users")
 @Entity
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Column(name="id")
-    private int id;
+    private long id;
     @Column(name="name")
     private String name;
-    @Column(name="surname")
-    private String surname;
-    @Column(name="department")
-    private String department;
-    @Column(name="salary")
-    private int salary;
+
+    @Column(name="last_name")
+    private String lastName;
+
+    @Column(name="email")
+    private String email;
+    @Column(name="age")
+    private int age;
 
     public User() {
+
     }
 
-    public User(int id, String name, String surname, String department, int salary) {
+    public User(long id, String name, String lastName, String email, int age) {
         this.id = id;
         this.name = name;
-        this.surname = surname;
-        this.department = department;
-        this.salary = salary;
+        this.lastName = lastName;
+        this.email = email;
+        this.age = age;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -46,28 +50,39 @@ public class User {
         this.name = name;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getDepartment() {
-        return department;
+    public String getEmail() {
+        return email;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public int getSalary() {
-        return salary;
+    public int getAge() {
+        return age;
     }
 
-    public void setSalary(int salary) {
-        this.salary = salary;
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "User(" +
+                "id =" + id +
+                ", name ='" + name + '\'' +
+                ", lastName ='" + lastName + '\'' +
+                ", email ='" + email + '\'' +
+                ", age =" + age +
+                ')';
     }
 }
 

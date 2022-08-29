@@ -6,42 +6,39 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
 @Repository
-public class UserDAOImpl implements UserDAO{
+public class UserDAOImpl implements UserDAO {
+
+    private final EntityManager entityManager;
 
     @Autowired
-    private SessionFactory sessionFactory;
+    public UserDAOImpl(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
     @Override
     public List<User> getAllUsers() {
-        Session session = sessionFactory.getCurrentSession();
-        List<User> allUsers = session.createQuery("from web.entity.User", web.entity.User.class)
-                .getResultList();
-
-        return allUsers;
+        return entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
     }
 
     @Override
     public void saveUser(User user) {
-        Session session = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(user);
     }
 
     @Override
-    public User getUser(int id) {
-        Session session = sessionFactory.getCurrentSession();
-        User user = session.get(User.class, id);
-        return user;
+    public User getUser(long id) {
+        return null;
     }
 
     @Override
-    public void deleteUser(int id) {
-        Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("delete from User where id =:userId");
-        query.setParameter("userId", id);
-        query.executeUpdate();
+    public void deleteUser(long id) {
+    }
+
+    @Override
+    public void updateUser(User user) {
 
     }
 }
